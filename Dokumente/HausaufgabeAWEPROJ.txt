@@ -1,0 +1,35 @@
+Fragen zu dem Projekt:
+
+- Sollen von einen Schüler die TR-Aufenthalte über mehrere Jahre angezeigt werden können ( und in welchen Format [Statistik]).
+- Soll es einen automatischen Timeout geben?
+- Wie sind Spezielle Buchstaben in den Namen der Schüler aufgelöst in der SCHILD-Datenbank?
+- Soll das Programm Passwortgesichert werden (wegen möglcihen unberechtigten Zugriff dritter)?
+- Wie wird sichergestellt, das jeder Schüler auch den Schein im TR-Raum abgibt/ zum TR-Raum geht?
+- Ist die Übertragungsnummer Eindeutig?
+
+Pflichtenheft:
+
+- Datenbank zur Erfassung der Daten
+- Übrespielen der Daten aus der SCHILD - Datenbank in der lokalen Datenbank (über andere Medien)
+- finden von Schülern anhand des Namens, mit Integrierter Suche bei mehereren Vor- bzw. Nachnamen
+- Erfassen der Aufenthalte mit Eingabeformular
+- Anzeige und Filterung der Anzahl der Aufenthalte pro Schüler
+- Passwortsicherung des Programms
+
+
+Datenbankaufbau (grob):
+
+ Schuelerdaten: (evtl. Änderung je nach ankommenden Daten aus der SCHILD-Datenbank)
+ - SchülerID (primary)
+ - Vorname
+ - Nachname
+ - Klasse
+ 
+ TRdaten:
+ - SchülerID (foreign, index)
+ - Datum
+ - Lehrer
+ - Übertragungs-Nr.
+ - TR-Lehrer
+ - Maßnahme
+ - TRnummer (primary)

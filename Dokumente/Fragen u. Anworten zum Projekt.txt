@@ -1,0 +1,24 @@
+- Findet die Auswertung auch über mehrere Jahre statt (ggf. mehrere Klassen, falls Schüler eine Klasse wechseln bzw. später in einem neuen Bildungsgang sind)?
+Ich möchte eine jährliche Auswertung haben, wobei die einzelnen Jahre nicht untereinander Bezug nehmen (müssen).
+Schüler wechseln schon mal innerhalb eines Schuljahres die Klasse, das hat aber über die Konsequenzen des TR-Aufenthaltes keine Relevanz. Will meinen: ist ein Schüler im BOJ zwei mal im TR gewesen und wechselt dann in die JoA und landet wieder im TR, dann hat er für dieses Schuljahr seinen 3. TR-Besuch mit der entsprechenden Konsequenz (siehe vorletzte Frage).
+Wechselt der Schüler mit dem neuen Schuljahr in einen anderen Bildungsgang bekommt er eine neue Chance.
+
+- Welches der Felder auf dem Formular sind Pflichtfelder?
+Pflichtfelder? Alle Spalten, die Sie auf dem Formblatt vorfinden, sind gewünscht. Die Relvanz der Felder ist unterschiedlich.
+Wichtig sind: Name, Vorname, Klasse, Ü-Nr.
+zweitrangig: überweisender Lehrer, Aufenthaltsdauer im TR, TR-Lehrerkürzel
+
+- Gibt es bzw. sind in Zukunft ggf. weitere Trainigsräume geplant? Ist dann ggf. ein Datenabgleich notwendig?
+Es gibt nur diesen einen TR und weitere sind auch nicht geplant.
+
+- Wann sollen Schüler ggf. wieder gelöscht werden?
+Die Schüler bekommen jedes Jahr bzw. mit Beginn eines neuen Schuljahres eine neue Chance. Schon nach dem 3. Besuch des TR gibt es die ersten Konsequenzen und nach dem 5. Besuch ist der Schüler u.U. länger vom Unterricht suspendiert. Da die Konsequenzen recht schnell beginnen schmerzhaft zu werden, sollen die Schüler mit jedem Schujahr eine neue Chance bekommen.
+Interessant wäre es natürlich den Werdegang eines Schülers an unserer Schule nicht nur in SchILD zu beobachten, sondern auch seine TR-Aufenthalte über die Jahre verteilt.
+
+- Soll aus dem Programm heraus ein Elternbrief generiert werden oder geschieht dies z.B. aus Schild?
+Da die einzelnen Klassenlehrer selber nicht "an SchILD herankommen" und unser Sekretariat z.Zt. etwas überfordert ist, gibt es einen Elternbrief, der aus der Druckerei kommt. Hier müssen nur noch per Hand die Namen eingetragen und die Konsequenzen angekreuzt werden. Irgendwann ist die Option eines Elternbriefes aus SchILD schon sinnvoll, den die jetzige Variante ist ja nicht sehr fortschrittlich...
+
+
+Wichtig ist mir, dass die Schüler auch bei unterschiedlicher Schreibweise ihres Namens, eindeutig zuzuordnen sind.
+Leider habe ich auf dem Rechner, mit dem ich die Statistik mache, keinen Zugang zu SchILD.
+Ich selber habe über einen anderen Rechner Zugang zu SchILD und kann mir so die Namen der Schüler und die Klassenzuordnung zu jedem Zeitpunkt auf einen Stick ziehen. Daher finde ich einen Schnittstelle zwischen Ihrem Programm und dem Stick mit den Namen, der mir immer zur Verfügung steht, wünschenswert (es sei denn, Sie sagen mir jetzt, dass das unnütz, wenig sinnvoll oder nicht machbar :-[ ).

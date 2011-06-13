@@ -1,0 +1,204 @@
+Jumli
+{
+  *** Applikation ***;
+  Version=1.4;
+  Elements=17;
+  {
+    *** Model ***;
+    Typ=3;
+    ActiveDiagramm=4;
+    {
+      *** GenSettings ***;
+      GetPrefix="get";
+      SetPrefix="set";
+      DBBaseClass="DbBasisObject";
+      DBRecordSet="DbSet";
+      GenerateWrite=true;
+      GenerateRead=true;
+    };
+    {
+      *** CompileDebugSettings ***;
+      AufrufCompiler="csc";
+      AufrufDebugger="cordbg";
+      DebugOptionen="/debug";
+    };
+    {
+      *** Package ***;
+      Name="UseCases";
+      ID=3;
+      Zugriff=2;
+      Type=2;
+      {
+        *** Diagramm ***;
+        Name="UseCases";
+        ID=4;
+        DiagrammTyp=2;
+        {
+          *** SystemZeichner ***;
+          Rechteck=341,76,1011,671;
+          Order=-1;
+          UMLElementID=7;
+        };
+        {
+          *** ActorZeichner ***;
+          Rechteck=193,108,232,167;
+          Order=-1;
+          UMLElementID=8;
+        };
+        {
+          *** ActorZeichner ***;
+          Rechteck=195,458,234,517;
+          Order=-1;
+          UMLElementID=9;
+        };
+        {
+          *** UseCaseZeichner ***;
+          Rechteck=536,109,595,148;
+          Order=-1;
+          UMLElementID=11;
+        };
+        {
+          *** BeziehungZeichner ***;
+          Order=-1;
+          UMLElementID=12;
+          TextOffset=0,5;
+        };
+        {
+          *** BeziehungZeichner ***;
+          Order=-1;
+          UMLElementID=13;
+          TextOffset=0,5;
+        };
+        {
+          *** UseCaseZeichner ***;
+          Rechteck=554,481,613,520;
+          Order=-1;
+          UMLElementID=14;
+        };
+        {
+          *** BeziehungZeichner ***;
+          Order=-1;
+          UMLElementID=15;
+          TextOffset=0,5;
+        };
+        {
+          *** UseCaseZeichner ***;
+          Rechteck=527,233,586,272;
+          Order=-1;
+          UMLElementID=16;
+        };
+        {
+          *** BeziehungZeichner ***;
+          Order=-1;
+          UMLElementID=17;
+          TextOffset=0,5;
+        };
+        {
+          *** UseCaseZeichner ***;
+          Rechteck=550,364,609,403;
+          Order=-1;
+          UMLElementID=18;
+        };
+        {
+          *** BeziehungZeichner ***;
+          Order=-1;
+          UMLElementID=19;
+          TextOffset=0,5;
+        };
+      };
+      {
+        *** UseCase ***;
+        Name="hh";
+        ID=10;
+        Zugriff=2;
+      };
+      {
+        *** UseCase ***;
+        Name="Schüler eintragen";
+        ID=11;
+        Zugriff=2;
+      };
+      {
+        *** UseCase ***;
+        Name="TR-Auswertung Anzeigen";
+        ID=14;
+        Zugriff=2;
+      };
+      {
+        *** UseCase ***;
+        Name="Eintrag aus Liste entfernen";
+        ID=16;
+        Zugriff=2;
+      };
+      {
+        *** UseCase ***;
+        Name="Schülerdaten importieren";
+        ID=18;
+        Zugriff=2;
+      };
+      {
+        *** Actor ***;
+        Name="Anwender";
+        ID=8;
+        Zugriff=2;
+        {
+          *** Beziehung ***;
+          ID=12;
+          Zugriff=2;
+          A=8;
+          B=11;
+        };
+      };
+      {
+        *** Actor ***;
+        Name="Bearbeiter";
+        ID=9;
+        Zugriff=2;
+        {
+          *** Beziehung ***;
+          ID=13;
+          Zugriff=2;
+          A=9;
+          B=11;
+        };
+        {
+          *** Beziehung ***;
+          ID=15;
+          Zugriff=2;
+          A=9;
+          B=14;
+        };
+        {
+          *** Beziehung ***;
+          ID=17;
+          Zugriff=2;
+          A=9;
+          B=16;
+        };
+        {
+          *** Beziehung ***;
+          ID=19;
+          Zugriff=2;
+          A=9;
+          B=18;
+        };
+      };
+      {
+        *** System ***;
+        Name="Datenhaltung";
+        ID=7;
+      };
+    };
+    {
+      *** Package ***;
+      Name="AWE_Projekt";
+      ID=5;
+      Zugriff=2;
+      {
+        *** Diagramm ***;
+        Name="AWE_Projekt";
+        ID=6;
+      };
+    };
+  };
+};
