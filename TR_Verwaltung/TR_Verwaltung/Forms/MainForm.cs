@@ -11,14 +11,12 @@ namespace TR_Verwaltung
 {
     public partial class MainForm : Form
     {
-        System.Random rnd = new System.Random(5);
-
         public MainForm()
         {
             InitializeComponent();
             panelLogin.BringToFront();
             panelLogin.Dock = DockStyle.Fill;
-            PopulateSchueler();
+            PopulateSchueler(Schueler.DemoData());
         }
 
         private void eingabeToolStripMenuItem_Click(object sender, EventArgs e)
@@ -44,33 +42,14 @@ namespace TR_Verwaltung
             panelEinstellungen.Dock = DockStyle.Fill;
         }
 
-        class DummySchueler
+        public void PopulateSchueler(List<Schueler> data)
         {
-            public DummySchueler(Random rnd)
-            {
-                Name = String.Format("Schueller Name {0}", rnd.Next(100));
-                Klasse = String.Format("IA{0}", rnd.Next(100));
-            }
-            public string Name { get; set; }
-            public string Klasse { get; set; }
-        }
-
-        public void PopulateSchueler()
-        {
-            int itemcount = rnd.Next(10,30);
-
-            BindingList<DummySchueler> schueler = new BindingList<DummySchueler>();
-
-            for (int i = 0; i < itemcount ; i++)
-            {
-                schueler.Add(new DummySchueler(rnd));
-            }
-
-            BindingSource asd = new BindingSource();
-            asd.DataSource = schueler;
+            BindingList<Schueler> bl = new BindingList<Schueler>(data);
+            BindingSource bs = new BindingSource();
+            bs.DataSource = bl;
 
             dataGridView1.DataSource = null;
-            dataGridView1.DataSource = asd;
+            dataGridView1.DataSource = bs;
             dataGridView1.Refresh();
         }
 
@@ -78,14 +57,15 @@ namespace TR_Verwaltung
         {
             if (e.RowIndex != -1 && e.ColumnIndex != -1)
             {
-                textBox4.Text = dataGridView1.Rows[e.RowIndex].Cells[0].FormattedValue.ToString();
-                textBox8.Text = dataGridView1.Rows[e.RowIndex].Cells[1].FormattedValue.ToString();
+                textBox4.Text = dataGridView1.Rows[e.RowIndex].Cells[0].FormattedValue.ToString() + " " + dataGridView1.Rows[e.RowIndex].Cells[1].FormattedValue.ToString();
+                textBox8.Text = dataGridView1.Rows[e.RowIndex].Cells[2].FormattedValue.ToString();
             }
         }
 
         private void textBox3_TextChanged(object sender, EventArgs e)
         {
-            PopulateSchueler();
+            List<Schueler> data = Schueler.findByName(textBox3.Text);
+            PopulateSchueler(data);
         }
 
         private void beendenToolStripMenuItem_Click(object sender, EventArgs e)

@@ -5,7 +5,7 @@ using System.Text;
 
 namespace TR_Verwaltung
 {
-    class Lehrer
+    public class Lehrer
     {
         public int DatenbankId { get; set; }
         public string Vorname { get; set; }
@@ -15,7 +15,7 @@ namespace TR_Verwaltung
 
         public static bool Login(string benutzername, string passwort)
         {
-            if(benutzername == "test") return true;
+            if(benutzername == "LINN") return true;
             return false;
         }
 

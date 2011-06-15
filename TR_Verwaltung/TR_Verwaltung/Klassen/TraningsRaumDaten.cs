@@ -5,7 +5,7 @@ using System.Text;
 
 namespace TR_Verwaltung
 {
-    class TraningsRaumDaten
+    public class TraningsRaumDaten
     {
         public int DatenbankId { get; set; }
         public Lehrer Lehrer { get; set; }
