@@ -74,6 +74,7 @@
             this.nachnameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.klasseDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.schuelerBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.txtrawsql = new System.Windows.Forms.TextBox();
             this.menuStrip1.SuspendLayout();
             this.panelLogin.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -104,13 +105,13 @@
             this.dateiToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.beendenToolStripMenuItem});
             this.dateiToolStripMenuItem.Name = "dateiToolStripMenuItem";
-            this.dateiToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
+            this.dateiToolStripMenuItem.Size = new System.Drawing.Size(46, 20);
             this.dateiToolStripMenuItem.Text = "&Datei";
             // 
             // beendenToolStripMenuItem
             // 
             this.beendenToolStripMenuItem.Name = "beendenToolStripMenuItem";
-            this.beendenToolStripMenuItem.Size = new System.Drawing.Size(127, 22);
+            this.beendenToolStripMenuItem.Size = new System.Drawing.Size(120, 22);
             this.beendenToolStripMenuItem.Text = "&Beenden";
             this.beendenToolStripMenuItem.Click += new System.EventHandler(this.beendenToolStripMenuItem_Click);
             // 
@@ -121,7 +122,7 @@
             this.schuelererfassungToolStripMenuItem,
             this.benutzereinstellungenToolStripMenuItem});
             this.prototypenToolStripMenuItem.Name = "prototypenToolStripMenuItem";
-            this.prototypenToolStripMenuItem.Size = new System.Drawing.Size(73, 20);
+            this.prototypenToolStripMenuItem.Size = new System.Drawing.Size(78, 20);
             this.prototypenToolStripMenuItem.Text = "Prototypen";
             // 
             // loginToolStripMenuItem
@@ -148,14 +149,15 @@
             // importierenToolStripMenuItem
             // 
             this.importierenToolStripMenuItem.Name = "importierenToolStripMenuItem";
-            this.importierenToolStripMenuItem.Size = new System.Drawing.Size(75, 20);
+            this.importierenToolStripMenuItem.Size = new System.Drawing.Size(81, 20);
             this.importierenToolStripMenuItem.Text = "Importieren";
             // 
             // exportierenToolStripMenuItem
             // 
             this.exportierenToolStripMenuItem.Name = "exportierenToolStripMenuItem";
-            this.exportierenToolStripMenuItem.Size = new System.Drawing.Size(75, 20);
+            this.exportierenToolStripMenuItem.Size = new System.Drawing.Size(78, 20);
             this.exportierenToolStripMenuItem.Text = "Exportieren";
+            this.exportierenToolStripMenuItem.Click += new System.EventHandler(this.exportierenToolStripMenuItem_Click);
             // 
             // statusStrip1
             // 
@@ -168,6 +170,7 @@
             // 
             // panelLogin
             // 
+            this.panelLogin.Controls.Add(this.txtrawsql);
             this.panelLogin.Controls.Add(this.groupBox1);
             this.panelLogin.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panelLogin.Location = new System.Drawing.Point(0, 24);
@@ -527,6 +530,14 @@
             // 
             this.schuelerBindingSource.DataSource = typeof(TR_Verwaltung.Model.Schueler);
             // 
+            // txtrawsql
+            // 
+            this.txtrawsql.Location = new System.Drawing.Point(115, 18);
+            this.txtrawsql.Multiline = true;
+            this.txtrawsql.Name = "txtrawsql";
+            this.txtrawsql.Size = new System.Drawing.Size(669, 202);
+            this.txtrawsql.TabIndex = 1;
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
@@ -545,6 +556,7 @@
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.panelLogin.ResumeLayout(false);
+            this.panelLogin.PerformLayout();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.panelErfassung.ResumeLayout(false);
@@ -608,6 +620,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn vornameDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn nachnameDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn klasseDataGridViewTextBoxColumn;
+        private System.Windows.Forms.TextBox txtrawsql;
     }
 }
 

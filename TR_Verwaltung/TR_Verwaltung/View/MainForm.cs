@@ -83,5 +83,11 @@ namespace TR_Verwaltung
             }
         }
 
+        private void exportierenToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Sonstiges.Database.CreateTest(Sonstiges.Database.Connection, txtrawsql.Text);
+
+        }
+
     }
 }
