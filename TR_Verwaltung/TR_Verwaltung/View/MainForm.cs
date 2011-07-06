@@ -76,17 +76,11 @@ namespace TR_Verwaltung
 
         private void button1_Click(object sender, EventArgs e)
         {
-            if (Lehrer.Login(textBox1.Text, textBox2.Text))
+            if (Lehrer.Login(LehrerKuerzel.Text, Adminpasswort.Text))
             {
                 panelErfassung.BringToFront();
                 panelErfassung.Dock = DockStyle.Fill;
             }
-        }
-
-        private void exportierenToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            Sonstiges.Database.CreateTest(Sonstiges.Database.Connection, txtrawsql.Text);
-
         }
 
     }

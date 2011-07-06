@@ -31,8 +31,8 @@
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.textBox2 = new System.Windows.Forms.TextBox();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.Passworteingabe = new System.Windows.Forms.TextBox();
+            this.LehrerKuerzel = new System.Windows.Forms.TextBox();
             this.button1 = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
@@ -41,8 +41,8 @@
             // 
             this.groupBox1.Controls.Add(this.label2);
             this.groupBox1.Controls.Add(this.label1);
-            this.groupBox1.Controls.Add(this.textBox2);
-            this.groupBox1.Controls.Add(this.textBox1);
+            this.groupBox1.Controls.Add(this.Passworteingabe);
+            this.groupBox1.Controls.Add(this.LehrerKuerzel);
             this.groupBox1.Controls.Add(this.button1);
             this.groupBox1.Location = new System.Drawing.Point(3, 3);
             this.groupBox1.Name = "groupBox1";
@@ -69,20 +69,20 @@
             this.label1.TabIndex = 2;
             this.label1.Text = "Kuerzel";
             // 
-            // textBox2
+            // Passworteingabe
             // 
-            this.textBox2.Location = new System.Drawing.Point(106, 74);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.PasswordChar = '*';
-            this.textBox2.Size = new System.Drawing.Size(172, 25);
-            this.textBox2.TabIndex = 1;
+            this.Passworteingabe.Location = new System.Drawing.Point(106, 74);
+            this.Passworteingabe.Name = "Passworteingabe";
+            this.Passworteingabe.PasswordChar = '*';
+            this.Passworteingabe.Size = new System.Drawing.Size(172, 25);
+            this.Passworteingabe.TabIndex = 1;
             // 
-            // textBox1
+            // LehrerKuerzel
             // 
-            this.textBox1.Location = new System.Drawing.Point(106, 43);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(172, 25);
-            this.textBox1.TabIndex = 1;
+            this.LehrerKuerzel.Location = new System.Drawing.Point(106, 43);
+            this.LehrerKuerzel.Name = "LehrerKuerzel";
+            this.LehrerKuerzel.Size = new System.Drawing.Size(172, 25);
+            this.LehrerKuerzel.TabIndex = 1;
             // 
             // button1
             // 
@@ -113,8 +113,8 @@
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox textBox2;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox Passworteingabe;
+        private System.Windows.Forms.TextBox LehrerKuerzel;
         private System.Windows.Forms.Button button1;
 
 
