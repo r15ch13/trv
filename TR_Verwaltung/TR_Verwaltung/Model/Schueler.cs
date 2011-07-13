@@ -6,6 +6,7 @@ using System.ComponentModel;
 using System.IO;
 using System.Data;
 using TR_Verwaltung.Sonstiges;
+using System.Data.SqlServerCe;
 
 namespace TR_Verwaltung.Model
 {
@@ -102,5 +103,24 @@ namespace TR_Verwaltung.Model
 
         }
         */
+
+        public static DataTable getSchueler()
+        {
+            DataTable dtResult = new DataTable();
+
+            dtResult.Columns.Add("SchuelerID");
+            dtResult.Columns.Add("Vorname");
+            dtResult.Columns.Add("Nachname");
+            dtResult.Columns.Add("Klassenbezeichnung");
+
+            SqlCeDataReader sqlReader = Database.executeReader("SELECT S.ID, S.Vorname, S.Nachname, K.Bezeichnung FROM Schueler S JOIN Schuelerklasse SK ON S.ID = SK.SchuelerID JOIN Klasse K ON SK.KlasseID = K.ID");
+
+            while (sqlReader.Read())
+            {
+                dtResult.Rows.Add(sqlReader.GetInt32(0), sqlReader.GetString(1), sqlReader.GetString(2), sqlReader.GetString(3));
+            }
+            
+            return dtResult;
+        }
     }
 }
