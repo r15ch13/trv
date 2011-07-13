@@ -102,7 +102,7 @@ namespace TR_Verwaltung.Sonstiges
         /// <returns></returns>
         public static Dictionary<string, object> executeRow(string queryStr)
         {
-            return executeRow(queryStr, new string[] { }, null);
+            return executeRow(queryStr, null, new string[] { });
         }
 
         /// <summary>
@@ -111,9 +111,9 @@ namespace TR_Verwaltung.Sonstiges
         /// <param name="queryStr">SQL Query</param>
         /// <param name="param">SQL Parameter</param>
         /// <returns></returns>
-        public static Dictionary<string, object> executeRow(string queryStr, object[] param)
+        public static Dictionary<string, object> executeRow(string queryStr, params object[] param)
         {
-            return executeRow(queryStr, param, null);
+            return executeRow(queryStr, null, param);
         }
 
         /// <summary>
@@ -123,7 +123,7 @@ namespace TR_Verwaltung.Sonstiges
         /// <param name="param">SQL Parameter</param>
         /// <param name="exclusiveConnection">Optionale Datenbankverbindung</param>
         /// <returns>Dictionary</returns>
-        public static Dictionary<string, object> executeRow(string queryStr, object[] param, SqlCeConnection exclusiveConnection)
+        public static Dictionary<string, object> executeRow(string queryStr, SqlCeConnection exclusiveConnection, params object[] param)
         {
             if (queryStr == "") throw new ArgumentNullException();
 
@@ -345,26 +345,6 @@ namespace TR_Verwaltung.Sonstiges
 
 
         #region "kram"
-
-        public static DataSet executeDataset(string queryStr, SqlCeConnection exclusiveConnection)
-        {
-            DataSet retVal = new DataSet();
-            /*
-            using (SqlCeCommand com = new SqlCeCommand(queryStr, exclusiveConnection == null ? Connection : exclusiveConnection))
-            {
-                reader = com.Ex;
-                SqlCeDataAdapter adapter = new SqlCeDataAdapter();
-            }
-            return reader;
-            SqlCeDataAdapter adapter = new SqlCeDataAdapter();
-            adapter.SelectCommand = (COMMAND_TYPE)cmd;
-
-
-            adapter.Fill(retVal);
-            */
-            return retVal;
-        }
-
 
         public static int InsertSchueler(Schueler s)
         {
