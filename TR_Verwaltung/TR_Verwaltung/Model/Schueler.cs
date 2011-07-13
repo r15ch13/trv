@@ -24,6 +24,19 @@ namespace TR_Verwaltung.Model
             Klasse = klasse;
         }
 
+        public Schueler(int datenbankid, Klasse klasse)
+        {
+            DatenbankId = datenbankid;
+            Klasse = klasse;
+
+            Dictionary<string, object> result = Database.executeRow(@"SELECT Vorname, Nachname FROM Schueler WHERE ID = {0}", datenbankid);
+            if (result.Count == 2)
+            {
+                Vorname = Convert.ToString(result["Vorname"]);
+                Nachname = Convert.ToString(result["Nachname"]);
+            }
+        }
+
         public static List<Schueler> findByName(string str)
         {
             return DemoData().Where(x =>
@@ -41,7 +54,7 @@ namespace TR_Verwaltung.Model
         }
 
         public static List<Schueler> DemoData()
-        {   
+        {
             List<Schueler> schueler = new List<Schueler>();
             /*
             schueler.Add(new Schueler("Atiqullah", "Zeyarmal", "IFK 210"));
@@ -57,7 +70,7 @@ namespace TR_Verwaltung.Model
         public static List<Schueler> Testdaten()
         {
             string datei = @"..\..\..\Testschueler.csv";
-            StreamReader sr = new StreamReader(datei,Encoding.Default);
+            StreamReader sr = new StreamReader(datei, Encoding.Default);
             string text = sr.ReadToEnd();
 
             List<Schueler> Testschueler = new List<Schueler>();
@@ -69,9 +82,9 @@ namespace TR_Verwaltung.Model
                 //Schueler s = new Schueler(lines[i].Split(';')[0].Replace('"', ' ').Trim(), lines[i].Split(';')[1].Replace('"', ' ').Trim(), lines[i].Split(';')[2].Replace('"', ' ').Trim());
                 //Testschueler.Add(s);
             }
-            
+
             //Klassen und Schüler hinzufügen falls noch nicht vorhanden 
-            foreach(Schueler typ in Testschueler)
+            foreach (Schueler typ in Testschueler)
             {
                 if (Database.executeScalar<int>(String.Format("SELECT COUNT(ID) FROM Klasse WHERE Bezeichnung = '{0}'", typ.Klasse), 0) == 0)
                 {
