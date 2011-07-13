@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
+using TR_Verwaltung.View;
 
 namespace TR_Verwaltung
 {
@@ -15,7 +16,7 @@ namespace TR_Verwaltung
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new MainForm());
+            Application.Run(new Startseite());
         }
     }
 }

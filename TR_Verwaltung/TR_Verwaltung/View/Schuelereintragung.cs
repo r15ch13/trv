@@ -9,9 +9,9 @@ using System.Windows.Forms;
 
 namespace TR_Verwaltung.View
 {
-    public partial class Testraumeintrag : Form
+    public partial class Schuelereintragung : Form
     {
-        public Testraumeintrag()
+        public Schuelereintragung()
         {
             InitializeComponent();
         }

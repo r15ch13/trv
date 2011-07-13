@@ -41,7 +41,7 @@
             this.exportierenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.panelLogin = new System.Windows.Forms.Panel();
-            this.testraumeintrag1 = new TR_Verwaltung.View.Testraumeintrag();
+            this.testraumeintrag1 = new TR_Verwaltung.View.Testraumeintragorg();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
@@ -637,7 +637,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn vornameDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn nachnameDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn klasseDataGridViewTextBoxColumn;
-        private TR_Verwaltung.View.Testraumeintrag testraumeintrag1;
+        private TR_Verwaltung.View.Testraumeintragorg testraumeintrag1;
         private System.Windows.Forms.ToolStripMenuItem asdToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem qweToolStripMenuItem;
     }
