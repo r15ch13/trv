@@ -14,14 +14,14 @@ namespace TR_Verwaltung.Model
         public int DatenbankId { get; set; }
         public string Vorname { get; set; }
         public string Nachname { get; set; }
-        public string Klasse { get; set; }
+        public Klasse Klasse { get; set; }
 
-        public Schueler(string vorname, string nachname, string klasse)
+        public Schueler(int datenbankid, string vorname, string nachname, Klasse klasse)
         {
-            this.DatenbankId = -1;
-            this.Vorname = vorname;
-            this.Nachname = nachname;
-            this.Klasse = klasse;
+            DatenbankId = datenbankid;
+            Vorname = vorname;
+            Nachname = nachname;
+            Klasse = klasse;
         }
 
         public static List<Schueler> findByName(string str)
@@ -32,7 +32,7 @@ namespace TR_Verwaltung.Model
         }
         public static List<Schueler> findByKlasse(string str)
         {
-            return DemoData().Where(x => x.Klasse.ToLower().Contains(str)).ToList();
+            return DemoData().Where(x => x.Klasse.ToString().ToLower().Contains(str)).ToList();
         }
 
         public static object Statistik()
@@ -41,20 +41,22 @@ namespace TR_Verwaltung.Model
         }
 
         public static List<Schueler> DemoData()
-        {
+        {   
             List<Schueler> schueler = new List<Schueler>();
+            /*
             schueler.Add(new Schueler("Atiqullah", "Zeyarmal", "IFK 210"));
             schueler.Add(new Schueler("Cakmakci", "Ismail", "IFK 210"));
             schueler.Add(new Schueler("Demukaj", "Mehmet", "IFK 210"));
             schueler.Add(new Schueler("Gödderz", "Romina", "JoA 210"));
             schueler.Add(new Schueler("Noory", "Sabrine", "WKJ 210"));
             schueler.Add(new Schueler("Husic", "Elvisa", "BGG 210"));
+            */
             return schueler;
         }
 
         public static List<Schueler> Testdaten()
         {
-            string datei = @"C:\Dokumente und Einstellungen\eppel_marcel\Desktop\trv\TR_Verwaltung\Testschueler.csv";
+            string datei = @"..\..\..\Testschueler.csv";
             StreamReader sr = new StreamReader(datei,Encoding.Default);
             string text = sr.ReadToEnd();
 
@@ -64,8 +66,8 @@ namespace TR_Verwaltung.Model
             for (int i = 1; i < lines.Length; i++)
             {
                 //vorname, nachname, klasse
-                Schueler s = new Schueler(lines[i].Split(';')[0].Replace('"', ' ').Trim(), lines[i].Split(';')[1].Replace('"', ' ').Trim(), lines[i].Split(';')[2].Replace('"', ' ').Trim());
-                Testschueler.Add(s);
+                //Schueler s = new Schueler(lines[i].Split(';')[0].Replace('"', ' ').Trim(), lines[i].Split(';')[1].Replace('"', ' ').Trim(), lines[i].Split(';')[2].Replace('"', ' ').Trim());
+                //Testschueler.Add(s);
             }
             
             //Klassen und Schüler hinzufügen falls noch nicht vorhanden 
@@ -81,5 +83,11 @@ namespace TR_Verwaltung.Model
 
             return Testschueler;
         }
+        /*
+        public static Schueler neuerSchueler()
+        {
+
+        }
+        */
     }
 }

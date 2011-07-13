@@ -67,8 +67,10 @@ CREATE TABLE Lehrerklasse
 
 CREATE TABLE Schuelerklasse
 (
+	ID int IDENTITY(1,1) PRIMARY KEY,
 	SchuelerID int REFERENCES Schueler(ID),
 	KlasseID int REFERENCES Klasse(ID),
+	Aktiv int NOT NULL DEFAULT 1,
 	Datum datetime
 )
 

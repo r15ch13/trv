@@ -37,9 +37,11 @@
             this.schuelererfassungToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.benutzereinstellungenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.importierenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.asdToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.exportierenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.panelLogin = new System.Windows.Forms.Panel();
+            this.testraumeintrag1 = new TR_Verwaltung.View.Testraumeintrag();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
@@ -74,6 +76,7 @@
             this.textBox4 = new System.Windows.Forms.TextBox();
             this.button2 = new System.Windows.Forms.Button();
             this.panelEinstellungen = new System.Windows.Forms.Panel();
+            this.qweToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.panelLogin.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -147,9 +150,19 @@
             // 
             // importierenToolStripMenuItem
             // 
+            this.importierenToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.asdToolStripMenuItem,
+            this.qweToolStripMenuItem});
             this.importierenToolStripMenuItem.Name = "importierenToolStripMenuItem";
             this.importierenToolStripMenuItem.Size = new System.Drawing.Size(75, 20);
             this.importierenToolStripMenuItem.Text = "Importieren";
+            // 
+            // asdToolStripMenuItem
+            // 
+            this.asdToolStripMenuItem.Name = "asdToolStripMenuItem";
+            this.asdToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.asdToolStripMenuItem.Text = "asd";
+            this.asdToolStripMenuItem.Click += new System.EventHandler(this.asdToolStripMenuItem_Click);
             // 
             // exportierenToolStripMenuItem
             // 
@@ -168,12 +181,21 @@
             // 
             // panelLogin
             // 
+            this.panelLogin.Controls.Add(this.testraumeintrag1);
             this.panelLogin.Controls.Add(this.groupBox1);
             this.panelLogin.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panelLogin.Location = new System.Drawing.Point(0, 0);
+            this.panelLogin.Location = new System.Drawing.Point(0, 24);
             this.panelLogin.Name = "panelLogin";
-            this.panelLogin.Size = new System.Drawing.Size(1008, 730);
+            this.panelLogin.Size = new System.Drawing.Size(1008, 684);
             this.panelLogin.TabIndex = 2;
+            // 
+            // testraumeintrag1
+            // 
+            this.testraumeintrag1.Location = new System.Drawing.Point(18, 6);
+            this.testraumeintrag1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.testraumeintrag1.Name = "testraumeintrag1";
+            this.testraumeintrag1.Size = new System.Drawing.Size(869, 568);
+            this.testraumeintrag1.TabIndex = 1;
             // 
             // groupBox1
             // 
@@ -527,16 +549,23 @@
             this.panelEinstellungen.Size = new System.Drawing.Size(1008, 730);
             this.panelEinstellungen.TabIndex = 11;
             // 
+            // qweToolStripMenuItem
+            // 
+            this.qweToolStripMenuItem.Name = "qweToolStripMenuItem";
+            this.qweToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.qweToolStripMenuItem.Text = "qwe";
+            this.qweToolStripMenuItem.Click += new System.EventHandler(this.qweToolStripMenuItem_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1008, 730);
+            this.Controls.Add(this.panelLogin);
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.menuStrip1);
-            this.Controls.Add(this.panelErfassung);
-            this.Controls.Add(this.panelLogin);
             this.Controls.Add(this.panelEinstellungen);
+            this.Controls.Add(this.panelErfassung);
             this.DoubleBuffered = true;
             this.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.MainMenuStrip = this.menuStrip1;
@@ -608,6 +637,9 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn vornameDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn nachnameDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn klasseDataGridViewTextBoxColumn;
+        private TR_Verwaltung.View.Testraumeintrag testraumeintrag1;
+        private System.Windows.Forms.ToolStripMenuItem asdToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem qweToolStripMenuItem;
     }
 }
 

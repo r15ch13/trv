@@ -18,6 +18,16 @@ namespace TR_Verwaltung
             panelLogin.BringToFront();
             panelLogin.Dock = DockStyle.Fill;
             PopulateSchueler(Schueler.DemoData());
+
+
+            Klasse neu = Klasse.Create("Tes'tbla");
+
+            Klasse bla = Klasse.GetByBezeichnung("BGSQ 10");
+            if (bla != null)
+            {
+                bla.Bezeichnung = @"BGSQ 11";
+                bla.Save();
+            }
         }
 
         private void eingabeToolStripMenuItem_Click(object sender, EventArgs e)
@@ -82,6 +92,19 @@ namespace TR_Verwaltung
                 panelErfassung.Dock = DockStyle.Fill;
             }
         }
+
+        private void asdToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Schueler.Testdaten();
+        }
+
+        private void qweToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            //Klasse bla = new Klasse("BGSQ 10");
+            //List<Schueler> qwe = bla.Schueler;
+        }
+
+        
 
     }
 }
