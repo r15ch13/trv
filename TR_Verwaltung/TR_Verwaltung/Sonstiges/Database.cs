@@ -40,6 +40,7 @@ namespace TR_Verwaltung.Sonstiges
                         _connection.Open();
                 }
                 _timer.Elapsed += new System.Timers.ElapsedEventHandler(timer_elapsed);
+                _timer.Stop();
                 _timer.Start();
                 return _connection;
             }
@@ -63,15 +64,7 @@ namespace TR_Verwaltung.Sonstiges
         {
             if (_connection.State != ConnectionState.Executing)
                 close();
-        }
-
-        /// <summary>
-        /// Setzt den Timer zurueck
-        /// </summary>
-        private static void timer_reset()
-        {
             _timer.Stop();
-            _timer.Start();
         }
 
         #endregion
@@ -89,7 +82,7 @@ namespace TR_Verwaltung.Sonstiges
             {
                 if (obj is string)
                 {
-                    string str = Convert.ToString(obj).Replace(@"'", @"\'").Replace(@"""", @"""""");
+                    string str = Convert.ToString(obj).Replace(@"'", @"''").Replace(@"""", @"""""");
                     tmp.Add(str);
                 }
                 else
@@ -139,8 +132,6 @@ namespace TR_Verwaltung.Sonstiges
 #if DEBUG
             Debug.WriteLine(str);
 #endif
-            timer_reset();
-
             Dictionary<string, object> retVal = new Dictionary<string, object>();
             SqlCeDataReader reader = null;
             try
@@ -215,8 +206,6 @@ namespace TR_Verwaltung.Sonstiges
 #if DEBUG
             Debug.WriteLine(str);
 #endif
-            timer_reset();
-
             object retVal = null;
             try
             {
@@ -279,8 +268,6 @@ namespace TR_Verwaltung.Sonstiges
 #if DEBUG
             Debug.WriteLine(str);
 #endif
-            timer_reset();
-
             int retVal = 0;
             try
             {
@@ -337,8 +324,6 @@ namespace TR_Verwaltung.Sonstiges
 #if DEBUG
             Debug.WriteLine(str);
 #endif
-            timer_reset();
-
             SqlCeDataReader reader = null;
             try
             {
