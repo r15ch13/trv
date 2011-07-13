@@ -17,9 +17,7 @@ namespace TR_Verwaltung
             InitializeComponent();
             panelLogin.BringToFront();
             panelLogin.Dock = DockStyle.Fill;
-            PopulateSchueler(Schueler.DemoData());
-
-
+            
             Klasse neu = Klasse.Create("Tes'tbla");
 
             Klasse bla = Klasse.GetByBezeichnung("BGSQ 10");
@@ -75,8 +73,8 @@ namespace TR_Verwaltung
 
         private void textBox3_TextChanged(object sender, EventArgs e)
         {
-            List<Schueler> data = Schueler.findByName(textBox3.Text);
-            PopulateSchueler(data);
+            //List<Schueler> data = Schueler.findByName(textBox3.Text);
+            //PopulateSchueler(data);
         }
 
         private void beendenToolStripMenuItem_Click(object sender, EventArgs e)
@@ -95,7 +93,7 @@ namespace TR_Verwaltung
 
         private void asdToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Schueler.Testdaten();
+            //Schueler.Testdaten();
         }
 
         private void qweToolStripMenuItem_Click(object sender, EventArgs e)
