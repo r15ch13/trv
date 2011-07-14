@@ -9,6 +9,7 @@ namespace Utils.Crypto
 {
     public static class SHA1
     {
+        /*
         public static string GetString(FileInfo file)
         {
             try 
@@ -24,15 +25,22 @@ namespace Utils.Crypto
                 throw new CryptoException(ex.Message, ex);
             }
         }
+        */
 
-        public static string GetString(string str, Encoding enc = null)
+        public static string GetString(string str)
+        {
+            return GetString(str, null);
+        }
+
+        public static string GetString(string str, Encoding enc)
         {
             try
             {
                 using (SHA1Managed sha = new SHA1Managed())
                 {
                     byte[] hash = (enc == null) ? sha.ComputeHash(Encoding.UTF8.GetBytes(str)) : sha.ComputeHash(enc.GetBytes(str));
-                    return Utils.StringHelper.ByteArrayToHexString(hash);
+                    //return Utils.StringHelper.ByteArrayToHexString(hash);
+                    return "";
                 }
             }
             catch (Exception ex)
@@ -41,7 +49,12 @@ namespace Utils.Crypto
             }
         }
 
-        public static string GetBase64(string str, Encoding enc = null)
+        public static string GetBase64(string str)
+        {
+            return GetBase64(str, null);
+        }
+
+        public static string GetBase64(string str, Encoding enc)
         {
             try
             {

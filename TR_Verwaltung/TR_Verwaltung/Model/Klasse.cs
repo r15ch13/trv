@@ -8,9 +8,15 @@ using System.Diagnostics;
 
 namespace TR_Verwaltung.Model
 {
-    public class Klasse
+    public abstract class Model
     {
         public int DatenbankId { get; set; }
+        public abstract int Save();
+        public abstract override string ToString();
+    }
+
+    public class Klasse : Model
+    {
         public string Bezeichnung { get; set; }
 
         public Klasse(int datenbankid, string bezeichnung)
@@ -19,7 +25,7 @@ namespace TR_Verwaltung.Model
             Bezeichnung = bezeichnung;
         }
 
-        public int Save()
+        public override int Save()
         {
             return Database.executeNonQuery(@"UPDATE Klasse SET Bezeichnung = '{0}' WHERE ID = {1}", Bezeichnung, DatenbankId);
         }
@@ -39,6 +45,14 @@ namespace TR_Verwaltung.Model
 
                 return listResult;
             }
+        }
+
+
+        public static Klasse GetById(int datenbankid)
+        {
+            Dictionary<string, object> result = Database.executeRow(@"SELECT ID, Bezeichnung FROM Klasse WHERE ID = {0}", datenbankid);
+            if (result.Count == 2) return new Klasse(Convert.ToInt32(result["ID"]), Convert.ToString(result["Bezeichnung"]));
+            return null;
         }
 
         public static Klasse GetByBezeichnung(string bezeichnung)

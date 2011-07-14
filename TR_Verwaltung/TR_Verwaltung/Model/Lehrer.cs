@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using TR_Verwaltung.Sonstiges;
+using System.Data.SqlServerCe;
 
 namespace TR_Verwaltung.Model
 {
@@ -49,21 +50,54 @@ namespace TR_Verwaltung.Model
         {
             get
             {
-                List<Schueler> listResult = new List<Klasse>();
+                List<Klasse> listResult = new List<Klasse>();
 
                 SqlCeDataReader sqlReader = Database.executeReader("SELECT KlasseID FROM Lehrerklasse WHERE (Aktiv = 1) AND (LehrerID = {0})", DatenbankId);
 
                 while (sqlReader.Read())
                 {
-                    listResult.Add(new Klasse(sqlReader.GetInt32(0), this));
+                    listResult.Add(Klasse.GetById(sqlReader.GetInt32(0)));
                 }
 
                 return listResult;
             }
         }
 
+        public void AddSchueler(Klasse klasse)
+        {
+            if (klasse == null) throw new ArgumentNullException();
+
+            if (Database.executeScalar<int>("SELECT COUNT(ID) FROM Lehrerklasse WHERE LehrerID = {0} AND KlasseID = {1}", -1, klasse.DatenbankId, DatenbankId) == 0)
+            {
+                Database.executeNonQuery("INSERT INTO Lehrerklasse (LehrerID, KlasseID, Datum, Aktiv) VALUES ({0}, {1}, GETDATE(), 1)", klasse.DatenbankId, DatenbankId);
+            }
+        }
+
+        public static Lehrer Create(string vorname, string nachname, string kuerzel, string passwort)
+        {
+            return Create(vorname, nachname, kuerzel, passwort, false);
+        }
+
+        public static Lehrer Create(string vorname, string nachname, string kuerzel, string passwort, bool istAdmin)
+        {
+            if (vorname == "" || nachname == "" || kuerzel == "") throw new ArgumentNullException();
+            
+            if (Database.executeScalar<int>(@"SELECT COUNT(ID) FROM Lehrer WHERE Kuerzel = '{0}' OR (Vorname = '{1}' AND Nachname '{2}')", -1, kuerzel, vorname, nachname) == 0)
+            {
+                Database.executeNonQuery(@"INSERT INTO Lehrer (Vorname, Nachname, Kuerzel, Passwort, Admin) VALUES ('{0}')", vorname, nachname, kuerzel, Utils.Crypto.SHA1.GetString(passwort, Encoding.Default), (istAdmin == true ? 1 : 0));
+            }
+            return GetByKuerzel(kuerzel);
+        }
+
+        private static Lehrer GetByKuerzel(string kuerzel)
+        {
+            throw new NotImplementedException();
+        }
+
         public static bool Login(string kuerzel, string passwort)
         {
+            if (kuerzel == "" || passwort == "") throw new ArgumentNullException();
+
             if (Database.executeScalar<int>("SELECT COUNT(ID) FROM Lehrer WHERE Kuerzel = '{0}' AND Passwort = '{1}'", -1, kuerzel, Utils.Crypto.SHA1.GetString(passwort, Encoding.Default)) == 1)
             {
                 return true;
