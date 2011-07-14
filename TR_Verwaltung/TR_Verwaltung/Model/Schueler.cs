@@ -38,6 +38,11 @@ namespace TR_Verwaltung.Model
             }
         }
 
+        public int Save()
+        {
+            return Database.executeNonQuery(@"UPDATE Schueler SET Vorname = '{0}', Nachname = '{1}' WHERE ID = {2}", Vorname, Nachname, DatenbankId);
+        }
+
         /*
         public static List<Schueler> findByName(string str)
         {

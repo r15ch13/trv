@@ -21,7 +21,7 @@ namespace TR_Verwaltung.Model
 
         public int Save()
         {
-            return Database.executeNonQuery(@"UPDATE Klasse SET Bezeichnung = '{0}' WHERE ID = {1}", new object[] { Bezeichnung, DatenbankId });
+            return Database.executeNonQuery(@"UPDATE Klasse SET Bezeichnung = '{0}' WHERE ID = {1}", Bezeichnung, DatenbankId);
         }
 
         public List<Schueler> Schueler

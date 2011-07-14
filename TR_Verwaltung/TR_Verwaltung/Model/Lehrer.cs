@@ -30,6 +30,11 @@ namespace TR_Verwaltung.Model
             }
         }
 
+        public int Save()
+        {
+            return Database.executeNonQuery(@"UPDATE Lehrer SET Vorname = '{0}', Nachname = '{1}', Kuerzel = '{2}', Passwort = '{3}', Admin = {4} WHERE ID = {5}", Vorname, Nachname, Kuerzel, Passwort, (Admin == true ? 1 : 0), DatenbankId);
+        }
+
         public void AddKlasse(Klasse klasse)
         {
             if (klasse == null) throw new ArgumentNullException();
