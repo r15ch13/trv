@@ -49,13 +49,25 @@ namespace TR_Verwaltung.Model
         {
             get
             {
-                return null;
+                List<Schueler> listResult = new List<Klasse>();
+
+                SqlCeDataReader sqlReader = Database.executeReader("SELECT KlasseID FROM Lehrerklasse WHERE (Aktiv = 1) AND (LehrerID = {0})", DatenbankId);
+
+                while (sqlReader.Read())
+                {
+                    listResult.Add(new Klasse(sqlReader.GetInt32(0), this));
+                }
+
+                return listResult;
             }
         }
 
-        public static bool Login(string benutzername, string passwort)
+        public static bool Login(string kuerzel, string passwort)
         {
-            if (benutzername == "LINN") return true;
+            if (Database.executeScalar<int>("SELECT COUNT(ID) FROM Lehrer WHERE Kuerzel = '{0}' AND Passwort = '{1}'", -1, kuerzel, Utils.Crypto.SHA1.GetString(passwort, Encoding.Default)) == 1)
+            {
+                return true;
+            }
             return false;
         }
 

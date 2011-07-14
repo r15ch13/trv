@@ -30,7 +30,7 @@ namespace TR_Verwaltung.Model
             {
                 List<Schueler> listResult = new List<Schueler>();
 
-                SqlCeDataReader sqlReader = Database.executeReader("SELECT SchuelerID FROM Schuelerklasse WHERE (Aktiv = 1) AND (KlasseID = 4)");
+                SqlCeDataReader sqlReader = Database.executeReader("SELECT SchuelerID FROM Schuelerklasse WHERE (Aktiv = 1) AND (KlasseID = {0})", DatenbankId);
 
                 while (sqlReader.Read())
                 {
