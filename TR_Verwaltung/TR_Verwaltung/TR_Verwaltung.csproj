@@ -68,6 +68,7 @@
       <DependentUpon>trv_dbDataSet.xsd</DependentUpon>
     </Compile>
     <Compile Include="Crypto\CryptoException.cs" />
+    <Compile Include="Model\Aufenthalt.cs" />
     <Compile Include="Model\Klasse.cs" />
     <Compile Include="Model\Lehrer.cs" />
     <Compile Include="Model\Model.cs" />
