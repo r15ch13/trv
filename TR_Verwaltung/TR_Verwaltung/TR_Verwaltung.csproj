@@ -70,6 +70,7 @@
     <Compile Include="Crypto\CryptoException.cs" />
     <Compile Include="Model\Klasse.cs" />
     <Compile Include="Model\Lehrer.cs" />
+    <Compile Include="Model\Model.cs" />
     <Compile Include="Model\Suche.cs" />
     <Compile Include="Sonstiges\Database.cs" />
     <Compile Include="Crypto\SHA1.cs" />

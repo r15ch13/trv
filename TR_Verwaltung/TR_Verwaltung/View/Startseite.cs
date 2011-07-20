@@ -15,7 +15,7 @@ namespace TR_Verwaltung.View
         public Startseite()
         {
             InitializeComponent();
-
+/*
             Klasse ia = Klasse.GetById(10);
             Klasse ae = Klasse.GetById(3);
             Lehrer wo = Lehrer.GetById(1);
@@ -23,6 +23,7 @@ namespace TR_Verwaltung.View
             wo.AddKlasse(ae);
             wo.RemoveKlasse(ia);
             List<Klasse> k = wo.Klassen;
+*/
         }
 
         public List<Schueler> Schueler { get; set; }

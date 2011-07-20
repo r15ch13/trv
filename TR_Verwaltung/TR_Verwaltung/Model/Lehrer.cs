@@ -15,6 +15,7 @@ namespace TR_Verwaltung.Model
         public string Passwort { get; set; }
         public bool Admin { get; set; }
 
+        #region "Constructor"
         public Lehrer(int datenbankid, string vorname, string nachname, string kuerzel, string passwort, bool admin)
         {
             DatenbankId = datenbankid;
@@ -39,12 +40,69 @@ namespace TR_Verwaltung.Model
                 Admin = Convert.ToInt32(result["Admin"]) == 1 ? true : false;
             }
         }
+        #endregion
 
+        #region "override"
         public override int Save()
         {
             return Database.executeNonQuery(@"UPDATE Lehrer SET Vorname = '{0}', Nachname = '{1}', Kuerzel = '{2}', Passwort = '{3}', Admin = {4} WHERE ID = {5}", Vorname, Nachname, Kuerzel, Passwort, (Admin == true ? 1 : 0), DatenbankId);
         }
 
+        public override void Delete()
+        {
+            Database.executeNonQuery(@"UPDATE Lehrer SET Aktiv = 0 WHERE ID = {0}", DatenbankId);
+        }
+
+        public override string ToString()
+        {
+            return String.Format("{0}, {1} ({2})", Nachname, Vorname, Kuerzel);
+        }
+        #endregion
+
+        #region "Static"
+        public static Lehrer Create(string vorname, string nachname, string kuerzel, string passwort)
+        {
+            return Create(vorname, nachname, kuerzel, passwort, false);
+        }
+
+        public static Lehrer Create(string vorname, string nachname, string kuerzel, string passwort, bool istAdmin)
+        {
+            if (vorname.Trim() == "" || nachname.Trim() == "" || kuerzel.Trim() == "") throw new ArgumentNullException();
+
+            if (Database.executeScalar<int>(@"SELECT COUNT(ID) FROM Lehrer WHERE Kuerzel = '{0}' OR (Vorname = '{1}' AND Nachname '{2}')", -1, kuerzel.Trim(), vorname.Trim(), nachname.Trim()) == 0)
+            {
+                Database.executeNonQuery(@"INSERT INTO Lehrer (Vorname, Nachname, Kuerzel, Passwort, Admin) VALUES ('{0}')", vorname.Trim(), nachname.Trim(), kuerzel.Trim(), Utils.Crypto.SHA1.GetString(passwort.Trim(), Encoding.Default), (istAdmin == true ? 1 : 0));
+            }
+            return GetByKuerzel(kuerzel);
+        }
+
+        public static Lehrer GetById(int datenbankid)
+        {
+            Dictionary<string, object> result = Database.executeRow(@"SELECT ID, Vorname, Nachname, Kuerzel, Passwort, Admin FROM Lehrer WHERE ID = {0}", datenbankid);
+            if (result.Count == 6) return new Lehrer(Convert.ToInt32(result["ID"]), Convert.ToString(result["Vorname"]), Convert.ToString(result["Nachname"]), Convert.ToString(result["Kuerzel"]), Convert.ToString(result["Passwort"]), (Convert.ToInt32(result["Admin"]) == 1 ? true : false));
+            return null;
+        }
+
+        private static Lehrer GetByKuerzel(string kuerzel)
+        {
+            Dictionary<string, object> result = Database.executeRow(@"SELECT ID, Vorname, Nachname, Kuerzel, Passwort, Admin FROM Lehrer WHERE Kuerzel = '{0}'", kuerzel);
+            if (result.Count == 6) return new Lehrer(Convert.ToInt32(result["ID"]), Convert.ToString(result["Vorname"]), Convert.ToString(result["Nachname"]), Convert.ToString(result["Kuerzel"]), Convert.ToString(result["Passwort"]), (Convert.ToInt32(result["Admin"]) == 1 ? true : false));
+            return null;
+        }
+
+        public static bool Login(string kuerzel, string passwort)
+        {
+            if (kuerzel == "" || passwort == "") throw new ArgumentNullException();
+
+            if (Database.executeScalar<int>("SELECT COUNT(ID) FROM Lehrer WHERE Kuerzel = '{0}' AND Passwort = '{1}'", -1, kuerzel, Utils.Crypto.SHA1.GetString(passwort, Encoding.Default)) == 1)
+            {
+                return true;
+            }
+            return false;
+        }
+        #endregion
+
+        #region "Klasse"
         public void AddKlasse(Klasse klasse)
         {
             if (klasse == null) throw new ArgumentNullException();
@@ -81,56 +139,10 @@ namespace TR_Verwaltung.Model
                 return listResult;
             }
         }
+        #endregion
 
-        public static Lehrer Create(string vorname, string nachname, string kuerzel, string passwort)
-        {
-            return Create(vorname, nachname, kuerzel, passwort, false);
-        }
+        
 
-        public static Lehrer Create(string vorname, string nachname, string kuerzel, string passwort, bool istAdmin)
-        {
-            if (vorname == "" || nachname == "" || kuerzel == "") throw new ArgumentNullException();
-            
-            if (Database.executeScalar<int>(@"SELECT COUNT(ID) FROM Lehrer WHERE Kuerzel = '{0}' OR (Vorname = '{1}' AND Nachname '{2}')", -1, kuerzel, vorname, nachname) == 0)
-            {
-                Database.executeNonQuery(@"INSERT INTO Lehrer (Vorname, Nachname, Kuerzel, Passwort, Admin) VALUES ('{0}')", vorname, nachname, kuerzel, Utils.Crypto.SHA1.GetString(passwort, Encoding.Default), (istAdmin == true ? 1 : 0));
-            }
-            return GetByKuerzel(kuerzel);
-        }
-
-        public static Lehrer GetById(int datenbankid)
-        {
-            Dictionary<string, object> result = Database.executeRow(@"SELECT ID, Vorname, Nachname, Kuerzel, Passwort, Admin FROM Lehrer WHERE ID = {0}", datenbankid);
-            if (result.Count == 6) return new Lehrer(Convert.ToInt32(result["ID"]), Convert.ToString(result["Vorname"]), Convert.ToString(result["Nachname"]), Convert.ToString(result["Kuerzel"]), Convert.ToString(result["Passwort"]), (Convert.ToInt32(result["Admin"]) == 1 ? true : false));
-            return null;
-        }
-
-        private static Lehrer GetByKuerzel(string kuerzel)
-        {
-            Dictionary<string, object> result = Database.executeRow(@"SELECT ID, Vorname, Nachname, Kuerzel, Passwort, Admin FROM Lehrer WHERE Kuerzel = '{0}'", kuerzel);
-            if (result.Count == 6) return new Lehrer(Convert.ToInt32(result["ID"]), Convert.ToString(result["Vorname"]), Convert.ToString(result["Nachname"]), Convert.ToString(result["Kuerzel"]), Convert.ToString(result["Passwort"]), (Convert.ToInt32(result["Admin"]) == 1 ? true : false));
-            return null;
-        }
-
-        public static bool Login(string kuerzel, string passwort)
-        {
-            if (kuerzel == "" || passwort == "") throw new ArgumentNullException();
-
-            if (Database.executeScalar<int>("SELECT COUNT(ID) FROM Lehrer WHERE Kuerzel = '{0}' AND Passwort = '{1}'", -1, kuerzel, Utils.Crypto.SHA1.GetString(passwort, Encoding.Default)) == 1)
-            {
-                return true;
-            }
-            return false;
-        }
-
-        public static List<Schueler> findByName(string name)
-        {
-            return null;
-        }
-
-        public override string ToString()
-        {
-            return String.Format("{0}, {1} ({2})", Nachname, Vorname, Kuerzel);
-        }
+        
     }
 }

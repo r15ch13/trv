@@ -9,6 +9,7 @@ namespace TR_Verwaltung.Model
     {
         public int DatenbankId { get; set; }
         public abstract int Save();
+        public abstract void Delete();
         public abstract override string ToString();
     }
 }
