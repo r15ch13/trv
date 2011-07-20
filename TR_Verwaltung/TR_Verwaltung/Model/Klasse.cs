@@ -8,13 +8,6 @@ using System.Diagnostics;
 
 namespace TR_Verwaltung.Model
 {
-    public abstract class Model
-    {
-        public int DatenbankId { get; set; }
-        public abstract int Save();
-        public abstract override string ToString();
-    }
-
     public class Klasse : Model
     {
         public string Bezeichnung { get; set; }
@@ -82,12 +75,20 @@ namespace TR_Verwaltung.Model
         {
             if (schueler == null) throw new ArgumentNullException();
 
-            if (Database.executeScalar<int>("SELECT COUNT(ID) FROM Schuelerklasse WHERE SchuelerID = {0} AND KlasseID = {1}", -1, schueler.DatenbankId, DatenbankId) == 0)
+            if (Database.executeScalar<int>("SELECT COUNT(ID) FROM Schuelerklasse WHERE SchuelerID = {0} AND KlasseID = {1} AND Aktiv = 1", -1, schueler.DatenbankId, DatenbankId) == 0)
             {
-                Database.executeNonQuery("INSERT INTO Schuelerklasse (SchuelerID, KlasseID, Datum, Aktiv) VALUES ({0}, {1}, GETDATE(), 1)", schueler.DatenbankId, DatenbankId);
+                Database.executeNonQuery("INSERT INTO Schuelerklasse (SchuelerID, KlasseID, Datum) VALUES ({0}, {1}, GETDATE())", schueler.DatenbankId, DatenbankId);
             }
         }
 
+        public void RemoveKlasse(Klasse klasse)
+        {
+            if (klasse == null) throw new ArgumentNullException();
 
+            if (Database.executeScalar<int>("SELECT COUNT(SchuelerID) FROM Schuelerklasse WHERE SchuelerID = {0} AND KlasseID = {1} AND Aktiv = 1", -1, DatenbankId, klasse.DatenbankId) == 0)
+            {
+                Database.executeNonQuery("UPDATE Schuelerklasse SET Aktiv = 0 WHERE SchuelerID = {0} AND KlasseID = {1}", DatenbankId, klasse.DatenbankId);
+            }
+        }
     }
 }

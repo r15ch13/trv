@@ -7,14 +7,23 @@ using System.Data.SqlServerCe;
 
 namespace TR_Verwaltung.Model
 {
-    public class Lehrer
+    public class Lehrer : Model
     {
-        public int DatenbankId { get; set; }
         public string Vorname { get; set; }
         public string Nachname { get; set; }
         public string Kuerzel { get; set; }
         public string Passwort { get; set; }
         public bool Admin { get; set; }
+
+        public Lehrer(int datenbankid, string vorname, string nachname, string kuerzel, string passwort, bool admin)
+        {
+            DatenbankId = datenbankid;
+            Vorname = vorname;
+            Nachname = nachname;
+            Kuerzel = kuerzel;
+            Passwort = passwort;
+            Admin = admin;
+        }
 
         public Lehrer(int datenbankid)
         {
@@ -31,7 +40,7 @@ namespace TR_Verwaltung.Model
             }
         }
 
-        public int Save()
+        public override int Save()
         {
             return Database.executeNonQuery(@"UPDATE Lehrer SET Vorname = '{0}', Nachname = '{1}', Kuerzel = '{2}', Passwort = '{3}', Admin = {4} WHERE ID = {5}", Vorname, Nachname, Kuerzel, Passwort, (Admin == true ? 1 : 0), DatenbankId);
         }
@@ -40,9 +49,19 @@ namespace TR_Verwaltung.Model
         {
             if (klasse == null) throw new ArgumentNullException();
 
-            if (Database.executeScalar<int>("SELECT COUNT(ID) FROM Lehrerklasse WHERE KlasseID = {0} AND LehrerID = {1}", -1, klasse.DatenbankId, DatenbankId) == 0)
+            if (Database.executeScalar<int>("SELECT COUNT(LehrerID) FROM Lehrerklasse WHERE LehrerID = {0} AND KlasseID = {1} AND Aktiv = 1", -1, DatenbankId, klasse.DatenbankId) == 0)
             {
-                Database.executeNonQuery("INSERT INTO Lehrerklasse (LehrerID, KlasseID, Datum) VALUES ({0}, {1}, GETDATE())", klasse.DatenbankId, DatenbankId);
+                Database.executeNonQuery("INSERT INTO Lehrerklasse (LehrerID, KlasseID, Datum) VALUES ({0}, {1}, GETDATE())", DatenbankId, klasse.DatenbankId);
+            }
+        }
+
+        public void RemoveKlasse(Klasse klasse)
+        {
+            if (klasse == null) throw new ArgumentNullException();
+
+            if (Database.executeScalar<int>("SELECT COUNT(LehrerID) FROM Lehrerklasse WHERE LehrerID = {0} AND KlasseID = {1} AND Aktiv = 1", -1, DatenbankId, klasse.DatenbankId) == 1)
+            {
+                Database.executeNonQuery("UPDATE Lehrerklasse SET Aktiv = 0 WHERE LehrerID = {0} AND KlasseID = {1}", DatenbankId, klasse.DatenbankId);
             }
         }
 
@@ -63,16 +82,6 @@ namespace TR_Verwaltung.Model
             }
         }
 
-        public void AddSchueler(Klasse klasse)
-        {
-            if (klasse == null) throw new ArgumentNullException();
-
-            if (Database.executeScalar<int>("SELECT COUNT(ID) FROM Lehrerklasse WHERE LehrerID = {0} AND KlasseID = {1}", -1, klasse.DatenbankId, DatenbankId) == 0)
-            {
-                Database.executeNonQuery("INSERT INTO Lehrerklasse (LehrerID, KlasseID, Datum, Aktiv) VALUES ({0}, {1}, GETDATE(), 1)", klasse.DatenbankId, DatenbankId);
-            }
-        }
-
         public static Lehrer Create(string vorname, string nachname, string kuerzel, string passwort)
         {
             return Create(vorname, nachname, kuerzel, passwort, false);
@@ -89,9 +98,18 @@ namespace TR_Verwaltung.Model
             return GetByKuerzel(kuerzel);
         }
 
+        public static Lehrer GetById(int datenbankid)
+        {
+            Dictionary<string, object> result = Database.executeRow(@"SELECT ID, Vorname, Nachname, Kuerzel, Passwort, Admin FROM Lehrer WHERE ID = {0}", datenbankid);
+            if (result.Count == 6) return new Lehrer(Convert.ToInt32(result["ID"]), Convert.ToString(result["Vorname"]), Convert.ToString(result["Nachname"]), Convert.ToString(result["Kuerzel"]), Convert.ToString(result["Passwort"]), (Convert.ToInt32(result["Admin"]) == 1 ? true : false));
+            return null;
+        }
+
         private static Lehrer GetByKuerzel(string kuerzel)
         {
-            throw new NotImplementedException();
+            Dictionary<string, object> result = Database.executeRow(@"SELECT ID, Vorname, Nachname, Kuerzel, Passwort, Admin FROM Lehrer WHERE Kuerzel = '{0}'", kuerzel);
+            if (result.Count == 6) return new Lehrer(Convert.ToInt32(result["ID"]), Convert.ToString(result["Vorname"]), Convert.ToString(result["Nachname"]), Convert.ToString(result["Kuerzel"]), Convert.ToString(result["Passwort"]), (Convert.ToInt32(result["Admin"]) == 1 ? true : false));
+            return null;
         }
 
         public static bool Login(string kuerzel, string passwort)
@@ -108,6 +126,11 @@ namespace TR_Verwaltung.Model
         public static List<Schueler> findByName(string name)
         {
             return null;
+        }
+
+        public override string ToString()
+        {
+            return String.Format("{0}, {1} ({2})", Nachname, Vorname, Kuerzel);
         }
     }
 }

@@ -10,9 +10,8 @@ using System.Data.SqlServerCe;
 
 namespace TR_Verwaltung.Model
 {
-    public class Schueler
+    public class Schueler : Model
     {
-        public int DatenbankId { get; set; }
         public string Vorname { get; set; }
         public string Nachname { get; set; }
         public Klasse Klasse { get; set; }
@@ -38,7 +37,7 @@ namespace TR_Verwaltung.Model
             }
         }
 
-        public int Save()
+        public override int Save()
         {
             return Database.executeNonQuery(@"UPDATE Schueler SET Vorname = '{0}', Nachname = '{1}' WHERE ID = {2}", Vorname, Nachname, DatenbankId);
         }
@@ -65,7 +64,7 @@ namespace TR_Verwaltung.Model
             dtResult.Columns.Add("Nachname");
             dtResult.Columns.Add("Klassenbezeichnung");
 
-            SqlCeDataReader sqlReader = Database.executeReader("SELECT S.ID, S.Vorname, S.Nachname, K.Bezeichnung FROM Schueler S JOIN Schuelerklasse SK ON S.ID = SK.SchuelerID JOIN Klasse K ON SK.KlasseID = K.ID");
+            SqlCeDataReader sqlReader = Database.executeReader("SELECT S.SchuelerID, S.Vorname, S.Nachname, K.Bezeichnung FROM Schueler S JOIN Schuelerklasse SK ON S.SchuelerID = SK.SchuelerID JOIN Klasse K ON SK.KlasseID = K.ID");
 
             while (sqlReader.Read())
             {
@@ -73,6 +72,11 @@ namespace TR_Verwaltung.Model
             }
             
             return dtResult;
+        }
+
+        public override string ToString()
+        {
+            return String.Format("{0}, {1}", Nachname, Vorname);
         }
     }
 }
